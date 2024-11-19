@@ -1,7 +1,7 @@
 ﻿using NUnit.Framework;
 using DataStructures.ArrayBased;
 
-namespace DataStructures.Tests
+namespace DataStructuresTestSuite.ArrayBased
 {
 
     [TestFixture]

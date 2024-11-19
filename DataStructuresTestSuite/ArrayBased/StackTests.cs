@@ -2,7 +2,7 @@
 using DataStructures.ArrayBased;
 using System;
 
-namespace DataStructures.Tests
+namespace DataStructuresTestSuite.ArrayBased
 {
     [TestFixture]
     public class StackTests
