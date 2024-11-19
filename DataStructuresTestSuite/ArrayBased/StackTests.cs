@@ -11,7 +11,7 @@ namespace DataStructuresTestSuite.ArrayBased
         [Test]
         public void TestPushAndTop()
         {
-            ArrayBased.Stack<int> stack = new ArrayBased.Stack<int>();
+            DataStructures.ArrayBased.Stack<int> stack = new DataStructures.ArrayBased.Stack<int>();
 
             stack.Push(10);
             stack.Push(20);
@@ -25,7 +25,7 @@ namespace DataStructuresTestSuite.ArrayBased
         [Test]
         public void TestPop()
         {
-            ArrayBased.Stack<int> stack = new ArrayBased.Stack<int>();
+           DataStructures.ArrayBased.Stack<int> stack = new DataStructures.ArrayBased.Stack<int>();
 
             stack.Push(10);
             stack.Push(20);
@@ -43,7 +43,7 @@ namespace DataStructuresTestSuite.ArrayBased
         [Test]
         public void TestContains()
         {
-            ArrayBased.Stack<int> stack = new ArrayBased.Stack<int>();
+           DataStructures.ArrayBased.Stack<int> stack = new DataStructures.ArrayBased.Stack<int>();
 
             stack.Push(10);
             stack.Push(20);
@@ -58,7 +58,7 @@ namespace DataStructuresTestSuite.ArrayBased
         [Test]
         public void TestIsEmpty()
         {
-            ArrayBased.Stack<int> stack = new ArrayBased.Stack<int>();
+           DataStructures.ArrayBased.Stack<int> stack = new DataStructures.ArrayBased.Stack<int>();
 
             Assert.IsTrue(stack.IsEmpty()); // Stack should be empty initially
 
@@ -71,7 +71,7 @@ namespace DataStructuresTestSuite.ArrayBased
         [Test]
         public void TestPopEmptyStack()
         {
-            ArrayBased.Stack<int> stack = new ArrayBased.Stack<int>();
+           DataStructures.ArrayBased.Stack<int> stack = new DataStructures.ArrayBased.Stack<int>();
 
             // Trying to pop from an empty stack should throw an IndexOutOfRangeException
             Assert.Throws<IndexOutOfRangeException>(() => stack.Pop());
@@ -81,7 +81,7 @@ namespace DataStructuresTestSuite.ArrayBased
         [Test]
         public void TestTopEmptyStack()
         {
-            ArrayBased.Stack<int> stack = new ArrayBased.Stack<int>();
+           DataStructures.ArrayBased.Stack<int> stack = new DataStructures.ArrayBased.Stack<int>();
 
             // Trying to peek from an empty stack should throw an IndexOutOfRangeException
             Assert.Throws<IndexOutOfRangeException>(() => stack.Top());
@@ -91,7 +91,7 @@ namespace DataStructuresTestSuite.ArrayBased
         [Test]
         public void TestCount()
         {
-            ArrayBased.Stack<int> stack = new ArrayBased.Stack<int>();
+           DataStructures.ArrayBased.Stack<int> stack = new DataStructures.ArrayBased.Stack<int>();
 
             // Count should initially be 0
             Assert.AreEqual(0, stack.Count);
@@ -112,7 +112,7 @@ namespace DataStructuresTestSuite.ArrayBased
         [Test]
         public void TestClearAndCopyTo()
         {
-            ArrayBased.Stack<int> stack = new ArrayBased.Stack<int>();
+           DataStructures.ArrayBased.Stack<int> stack = new DataStructures.ArrayBased.Stack<int>();
 
             stack.Push(10);
             stack.Push(20);

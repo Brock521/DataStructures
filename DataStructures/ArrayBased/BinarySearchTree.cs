@@ -32,7 +32,7 @@ namespace DataStructures.ArrayBased
 
         public void Insert(TreeNode<T> node)
         {
-           if(count == 0)
+            if (count == 0)
             {
                 tree.Add(node);
                 count++;
@@ -40,7 +40,8 @@ namespace DataStructures.ArrayBased
             }
 
             int pos = 0;
-            while (tree[pos] is not null){
+            while (tree[pos] is not null)
+            {
                 if (comparer.Compare(tree[pos].GetValue(), node.GetValue()) > 0)
                 {
                     pos = pos * 2 + 1;
@@ -50,7 +51,7 @@ namespace DataStructures.ArrayBased
                     pos = pos * 2 + 2;
                 }
 
-                while(tree.Count <= pos)
+                while (tree.Count <= pos)
                 {
                     tree.Add(null);
                 }
@@ -58,7 +59,7 @@ namespace DataStructures.ArrayBased
 
             tree[pos] = node;
             count++;
-            
+
         }
 
         public void BreadthFirstTraversal(Action<T> action)
@@ -82,22 +83,27 @@ namespace DataStructures.ArrayBased
             throw new NotImplementedException();
         }
 
-        public IEnumerable<T> GetChildren(T index)
+        public IEnumerable<TreeNode<T>> GetChildren(int index)
         {
-            throw new NotImplementedException();
+            List<TreeNode<T>> children = new List<TreeNode<T>>();
+            children.Add(tree[index * 2 + 1]);
+            children.Add(tree[index * 2 + 2]);
+
+            return children;
         }
+
         public TreeNode<T> Search(int index)
         {//Search for item at a particular index in the array
-           if(index < 0) return null;
+            if (index < 0) return null;
 
             return tree[index];
-            
+
         }
 
         public int Search(TreeNode<T> node)
         {//Search for a particular node
 
-            if (count == 0) return -1; 
+            if (count == 0) return -1;
 
             int pos = 0;
             while (tree[pos] is not null)
@@ -121,7 +127,7 @@ namespace DataStructures.ArrayBased
             return -1;
         }
 
-       
+
 
     }
 }
