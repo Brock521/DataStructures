@@ -14,11 +14,19 @@ namespace DataStructures.Helpers
         TreeNode<T> parent;
         List<TreeNode<T>> children;
 
+        public TreeNode(int key, T value, TreeNode<T> parent)
+        {
+            this.key = key;
+            this.value = value;
+            this.parent = parent;
+            children = new List<TreeNode<T>>();
+
+        }
+
         public TreeNode(int key, T value)
         {
             this.key = key;
             this.value = value;
-
         }
 
         // Getter for key
@@ -45,11 +53,6 @@ namespace DataStructures.Helpers
             this.value = value;
         }
 
-        public void SetParent(T parent)
-        {
-            this.parent = new TreeNode<T>(0, parent);
-        }
-
         public void SetParent(TreeNode<T> parent)
         {
             this.parent = parent;
@@ -61,11 +64,12 @@ namespace DataStructures.Helpers
         }
         public void AddChild(T child)
         {
-            children.Add(new TreeNode<T>(0, child));
+            children.Add(new TreeNode<T>(0, child,this));
         }
 
         public void AddChild(TreeNode<T> child)
         {
+           child.SetParent(this);
             children.Add(child);
         }
 

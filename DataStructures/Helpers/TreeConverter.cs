@@ -1,71 +1,47 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DataStructures.Helpers
 {
-    public static class TreeConverter<T>
+    public class TreeConverter<T>
     {
-        public static List<TreeNode<T>> GenerateToArrayFromRootNode(TreeNode<T> root, Comparer comparer)
-        {       
-                if (root == null) throw new ArgumentNullException(nameof(root));
+        public  List<TreeNode<T>> NodeBredFirstTraversal(TreeNode<T> root)
+        {
+           //This will remain here until I implement the same for nodes, then this can be removed, will add a functions here to handle back and forth conversion later
+           //There is probably a more efficient method than stripping all of the data then rebuilding but that is a later issue.
+           
+            List<TreeNode<T>> retrievedData = new List<TreeNode<T>>();
 
-                // List to represent the array-based tree
-                List<TreeNode<T>> generatedTree = new List<TreeNode<T>>();
-                Queue<TreeNode<T>> queue = new Queue<TreeNode<T>>();
+            if (root == null) throw new ArgumentNullException("root");
+                
+            Queue<TreeNode<T>> queue = new Queue<TreeNode<T>>();
+            queue.Enqueue(root);
 
-                // Start with the root node
-                queue.Enqueue(root);
+            while (queue.Count > 0)
+            {
+                TreeNode<T> current = queue.Dequeue();
+                retrievedData.Add(current);
 
-                while (queue.Count > 0)
+                if (current.GetChildren().Count > 2)
                 {
-                    TreeNode<T> currentNode = queue.Dequeue();
-
-                    // Add the current node to the array-based tree
-                    generatedTree.Add(currentNode);
-
-                    // Get the children of the current node
-                    List<TreeNode<T>> childrenNodes = currentNode.GetChildren();
-
-                    // Validate the number of children
-                    if (childrenNodes.Count > 2)
-                    {
-                        throw new InvalidDataException("A node has more than two children, which is not allowed for a binary tree.");
-                    }
-
-                    // Add children to the queue (for breadth-first traversal)
-                    foreach (var child in childrenNodes)
-                    {
-                        queue.Enqueue(child);
-                    }
-
-                    // Ensure the left and right children are ordered correctly if needed
-                    if (childrenNodes.Count == 2)
-                    {
-                        if (comparer.Compare(childrenNodes[0].GetValue(), childrenNodes[1].GetValue()) > 0)
-                        {
-                            currentNode.setChild(1, childrenNodes[1]);
-                            currentNode.setChild(0, childrenNodes[0]);
-                        }
-                        else
-                        {
-                            currentNode.setChild(0, childrenNodes[0]);
-                            currentNode.setChild(1, childrenNodes[1]);
-                        }
-                    }
-                    else if (childrenNodes.Count == 1)
-                    {
-                        currentNode.setChild(0, childrenNodes[0]);
-                        currentNode.setChild(1, null);
-                    }
+                    throw new ArgumentOutOfRangeException("To many Children");
                 }
 
-                return generatedTree;
+                foreach (var child in current.GetChildren())
+                {
+                    queue.Enqueue(child);
+                }
             }
-        
+
+            return retrievedData;
+           
+        }
+
 
     }
 }
