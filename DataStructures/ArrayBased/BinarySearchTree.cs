@@ -2,6 +2,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
@@ -60,15 +61,6 @@ namespace DataStructures.ArrayBased
             
         }
 
-        private void EnsureCapacity(int capacity)
-        {
-            // Add default values to the list if necessary
-            while (tree.Count < capacity)
-            {
-                tree.Add(null);  // Fill with default values (null for reference types, 0 for int, etc.)
-            }
-        }
-
         public void BreadthFirstTraversal(Action<T> action)
         {
             throw new NotImplementedException();
@@ -96,14 +88,40 @@ namespace DataStructures.ArrayBased
         }
         public TreeNode<T> Search(int index)
         {//Search for item at a particular index in the array
-            throw new NotImplementedException();
+           if(index < 0) return null;
+
+            return tree[index];
+            
         }
 
-        public TreeNode<T> Search(TreeNode<T> node)
+        public int Search(TreeNode<T> node)
         {//Search for a particular node
-            throw new NotImplementedException();
+
+            if (count == 0) return -1; 
+
+            int pos = 0;
+            while (tree[pos] is not null)
+            {
+
+                if (tree[pos].GetKey().Equals(node.GetKey()) && tree[pos].GetValue().Equals(node.GetValue()))
+                {
+                    return pos;
+                }
+
+                if (comparer.Compare(tree[pos].GetValue(), node.GetValue()) > 0)
+                {
+                    pos = pos * 2 + 1;
+                }
+                else
+                {
+                    pos = pos * 2 + 2;
+                }
+            }
+
+            return -1;
         }
 
+       
 
     }
 }
