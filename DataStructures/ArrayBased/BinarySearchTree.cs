@@ -23,9 +23,17 @@ namespace DataStructures.ArrayBased
         private List<TreeNode<int>> nodeInput;
 
         public BinarySearchTree(List<TreeNode<T>> treeList)
-        {///Tree may not be in order but we must assume the root is index = 0. 
+        {///Tree may not be in order but we must assume the root is index = 0, we will re-create 
             tree = new List<TreeNode<T>>();
             comparer = Comparer<T>.Default; // Use default comparer for T
+            count = 0;
+            foreach (TreeNode<T> node in treeList) { Insert(node); }
+        }
+
+        public BinarySearchTree(List<TreeNode<T>> treeList, Comparer<T> comparer)
+        {///Tree may not be in order but we must assume the root is index = 0, we will re-create 
+            tree = new List<TreeNode<T>>();
+            this.comparer = comparer; // Use default comparer for T
             count = 0;
             foreach (TreeNode<T> node in treeList) { Insert(node); }
         }
