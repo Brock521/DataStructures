@@ -6,18 +6,19 @@ using System.Reflection.Metadata.Ecma335;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using DataStructures.Helpers;
 
 namespace DataStructures.ArrayBased
 {
-    public class BinarySearchTree<T>
+    public class BinarySearchTree<T> 
     {
         /*
          Since using an array to add and remove element from a tree is not the typical use case and is not as efficient
         as with linked lists I am going to keep this class mostly for searching and traversing
          */
 
-        public List<TreeNode<T>> tree;
+        private List<TreeNode<T>> tree;
         private int count;
         private IComparer comparer;
         private List<TreeNode<int>> nodeInput;
@@ -45,6 +46,9 @@ namespace DataStructures.ArrayBased
                 tree.Add(node);
                 count++;
                 return;
+            } else if(node is null)
+            {
+                return;
             }
 
             int pos = 0;
@@ -70,32 +74,69 @@ namespace DataStructures.ArrayBased
 
         }
 
-        public void BreadthFirstTraversal(Action<T> action)
+        public void InOrderTraversal(TreeNode<T> node, List<TreeNode<T>> traversalArray)
         {
-            throw new NotImplementedException();
+            if (node == null) return; // Base case
+
+            int nodePos = Search(node); // Find the position of the current node in the tree
+
+            // Check if the left child exists and is not outside the bounds of the array
+            if (nodePos * 2 + 1 < tree.Count && tree[nodePos * 2 + 1] != null)
+                InOrderTraversal(tree[nodePos * 2 + 1], traversalArray);
+
+            // Add the current node
+            traversalArray.Add(node);
+
+            // Check if the right child exists and is not outside the bounds of the array
+            if (nodePos * 2 + 2 < tree.Count && tree[nodePos * 2 + 2] != null) 
+                InOrderTraversal(tree[nodePos * 2 + 2], traversalArray);
         }
 
-        public void InOrderTraversal(Action<T> action)
+
+        public void PostOrderTraversal(TreeNode<T> node, List<TreeNode<T>> traversalArray)
         {
-            throw new NotImplementedException();
+
+
+            if (node == null) return; // Base case
+
+            int nodePos = Search(node); // Find the position of the current node in the tree
+
+            if (nodePos * 2 + 1 < tree.Count && tree[nodePos * 2 + 1] != null)
+                PostOrderTraversal(tree[nodePos * 2 + 1], traversalArray);
+
+
+            if (nodePos * 2 + 2 < tree.Count && tree[nodePos * 2 + 2] != null)
+                PostOrderTraversal(tree[nodePos * 2 + 2], traversalArray);
+
+
+            traversalArray.Add(node);
         }
 
-
-        public void PostOrderTraversal(Action<T> action)
+        public void PreOrderTraversal(TreeNode<T> node, List<TreeNode<T>> traversalArray)
         {
-            throw new NotImplementedException();
-        }
 
-        public void PreOrderTraversal()
-        {
-            throw new NotImplementedException();
+            if (node == null) return; // Base case
+
+            int nodePos = Search(node); // Find the position of the current node in the tree
+
+            traversalArray.Add(node);
+
+            if (nodePos * 2 + 1 < tree.Count && tree[nodePos * 2 + 1] != null)
+                PreOrderTraversal(tree[nodePos * 2 + 1], traversalArray);
+
+
+            if (nodePos * 2 + 2 < tree.Count && tree[nodePos * 2 + 2] != null)
+                PreOrderTraversal(tree[nodePos * 2 + 2], traversalArray);
         }
 
         public IEnumerable<TreeNode<T>> GetChildren(int index)
         {
             List<TreeNode<T>> children = new List<TreeNode<T>>();
-            children.Add(tree[index * 2 + 1]);
-            children.Add(tree[index * 2 + 2]);
+
+            if (index * 2 + 1 < tree.Count && tree[index * 2 + 1] != null)
+                children.Add(tree[index * 2 + 1]);
+            if (index * 2 + 2 < tree.Count && tree[index * 2 + 2] != null)
+                children.Add(tree[index * 2 + 2]);
 
             return children;
         }
@@ -109,9 +150,9 @@ namespace DataStructures.ArrayBased
         }
 
         public int Search(TreeNode<T> node)
-        {//Search for a particular node
+        {//Search for a particular nodes index
 
-            if (count == 0) return -1;
+            if (count == 0 || node is null) return -1;
 
             int pos = 0;
             while (tree[pos] is not null)
@@ -135,6 +176,15 @@ namespace DataStructures.ArrayBased
             return -1;
         }
 
+        public IEnumerable<TreeNode<T>> GetTree()
+        {
+            return this.tree;
+        }
+
+        public int Count()
+        {
+            return this.count;
+        }
 
 
     }
