@@ -22,6 +22,8 @@ namespace DataStructures.ArrayBased
 
         public Dictionary()
         {
+            //Default constructor
+
             this.dictionary = new List<Node<T>>[10];
 
             // Initialize each list in the array
@@ -30,12 +32,12 @@ namespace DataStructures.ArrayBased
                 this.dictionary[i] = new List<Node<T>>();
             }
 
-
             highestKey = 0;
             count = 0;
         }
         public Dictionary(IList<Node<T>>[] dictionary)
         {
+            
             this.dictionary = dictionary;
             count = 0;
             foreach (var item in dictionary)
@@ -65,7 +67,11 @@ namespace DataStructures.ArrayBased
 
         public object SyncRoot => throw new NotImplementedException();
 
-
+        
+        /*
+         * Each 'bucket' holds an array with all items with matching hash values. This function will find the hash value
+         * matching the bucket the item should be put into based on its key.
+         */
         public int GetBucketIndex(int key)
         {
             if (key <= -1) throw new ArgumentNullException(key.ToString());
@@ -74,14 +80,20 @@ namespace DataStructures.ArrayBased
 
         }
 
+        /*
+         Generates a key sequentially based off the highest key value+1. The highest key value is tracked when we add new nodes or call generate Key;
+         */
         public int GenerateKey()
-        {//Sequential key, will always use 1+the last highest key;
+        {
             return ++highestKey;
         }
 
+        /*
+         Adds an item to the dictionary using the key and value pair provided. Non-positive numbers will throw an error.
+         */
         public void Add(int key, T? value)
         {
-            if (key <= -1) throw new ArgumentOutOfRangeException(key.ToString());
+            if (key <= -1) throw new ArgumentOutOfRangeException(key + "");
 
             int bucketIndex = GetBucketIndex(key);
 
@@ -92,6 +104,9 @@ namespace DataStructures.ArrayBased
             count++;
         }
 
+        /*
+         Iterates of the dictionary and calls clear on each of its buckets
+         */
         public void Clear()
         {
             foreach (var node in dictionary)
@@ -102,6 +117,9 @@ namespace DataStructures.ArrayBased
             count = 0;
         }
 
+        /*
+         Iterates over all buckets in the dictionary and checks if the item is contained in any
+         */
         public bool Contains(int key)
         {
 
@@ -121,6 +139,9 @@ namespace DataStructures.ArrayBased
             throw new NotImplementedException();
         }
 
+        /*
+         Removes the key value pairing based off of the provided key. If the key is not found nothing is removed and no error is thrown
+         */
         public void Remove(int key)
         {
             int bucketIndex = GetBucketIndex(key);
@@ -139,6 +160,10 @@ namespace DataStructures.ArrayBased
           
         }
 
+
+        /*
+         Returns a collection of all keys in each bucket by iterating over each
+         */
         public ICollection GetKeys()
         {
             List<int> keys = new List<int>();
@@ -154,6 +179,9 @@ namespace DataStructures.ArrayBased
             return keys;
         }
 
+        /*
+       Returns a collection of all values in each bucket by iterating over each
+       */
         public ICollection GetValues()
         {
             List<T> values = new List<T>();
@@ -169,6 +197,7 @@ namespace DataStructures.ArrayBased
 
             return values;
         }
+
         public int GetCount()
         {
             return this.count;
