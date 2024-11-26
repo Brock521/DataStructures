@@ -5,7 +5,7 @@ using System.Runtime.CompilerServices;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataStructures.Helpers
+namespace DataStructures
 {
     public class TreeNode<T>
     {
@@ -64,12 +64,12 @@ namespace DataStructures.Helpers
         }
         public void AddChild(T child)
         {
-            children.Add(new TreeNode<T>(0, child,this));
+            children.Add(new TreeNode<T>(0, child, this));
         }
 
         public void AddChild(TreeNode<T> child)
         {
-           child.SetParent(this);
+            child.SetParent(this);
             children.Add(child);
         }
 

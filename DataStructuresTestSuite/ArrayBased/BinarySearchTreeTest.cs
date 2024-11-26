@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using NUnit.Framework;
 using DataStructures.ArrayBased;
-using DataStructures.Helpers;
+using DataStructures;
 
 namespace DataStructuresTestSuite.ArrayBased
 {
