@@ -1,5 +1,7 @@
 This repo will simply be the spot where I revisit data structures, but with Kotlin instead of Java, where I originally learned them.
 
+Each data structure will implement the Kotlin Standard Library interface if it is available to meet the standards. This should give an idea of the functions implemented, their arguments, and their return types. 
+
 Each file will have space and time complexity listed, along with a brief description of the functions.
 
 For the sake of demonstration, I will omit using the built-in container functions with the same name to show that I can override and implement each function on my own. For example, if the structure is implemented using a mutableList, I will avoid using mutableList.iterator() or mutableList.contains() and will write my own implementation as an overridden function.
