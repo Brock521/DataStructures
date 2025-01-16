@@ -30,7 +30,7 @@ class ListDeque<E>(private var deque: MutableList<E> = mutableListOf()) : Deque<
     * O(1)
     */
     override fun isEmpty(): Boolean {
-        return size > 0
+        return size <= 0
     }
 
     /*******************************Start Queue Functions***********************************/

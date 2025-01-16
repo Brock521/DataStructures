@@ -18,7 +18,7 @@ class ListQueue<E>(private var queue: MutableList<E> = mutableListOf()) : Queue<
     * O(1)
     */
     override fun isEmpty(): Boolean {
-        return size > 0
+        return size <= 0
     }
 
     /*
