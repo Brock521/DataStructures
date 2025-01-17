@@ -56,19 +56,19 @@ class NodeBSTree<E : Comparable<E>> {
         }
     }
 
-    fun smallestValue(rootNode: Node<E>): E {
+    private fun smallestValue(rootNode: Node<E>): E {
         val leftNode = rootNode.left
         if (leftNode === null) return rootNode.value
         return smallestValue(leftNode)
     }
 
 
-    fun removeRecursive(currentNode: Node<E>?, value: E): Node<E>? {
+    private fun removeRecursive(currentNode: Node<E>?, value: E): Node<E>? {
             if (currentNode == null) {
                 return null
             }
 
-            if (value == currentNode.value) {
+            if (value.compareTo(currentNode.value) == 0) {
                 if (currentNode.left == null && currentNode.right== null) {
                     return null
                 }
@@ -85,7 +85,7 @@ class NodeBSTree<E : Comparable<E>> {
                 return currentNode
             }
 
-            if (value < currentNode.value) {
+            if (value.compareTo(currentNode.value) < 0) {
                 currentNode.left = removeRecursive(currentNode.left, value)
             } else {
                 currentNode.right = removeRecursive(currentNode.right, value)
@@ -130,7 +130,6 @@ class NodeBSTree<E : Comparable<E>> {
         }
 
     }
-
 
      fun search(value: E): Node<E>? {
         if(isEmpty()) return null
