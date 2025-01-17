@@ -60,10 +60,12 @@ class NodeBSTree<E : Comparable<E>> {
     /*Calls return recursive to remove the node with the matching and return true if a node was removed.
     * O(n) in the case that there is only a single branch. Θ(logn) on average
     */
-    fun remove(value: E){
+    fun remove(value: E) : Boolean{
+        val initialSize = size
         if(root != null) {
              removeRecursive(root, value)
         }
+        return initialSize != size
     }
 
     /*Returns the smallest value in the tree ie)The left most leaf
@@ -106,6 +108,7 @@ class NodeBSTree<E : Comparable<E>> {
                 currentNode.value = smallestValue
                 //Remove the node with the same value to remove the duplicate
                 currentNode.right = removeRecursive(currentNode.right, smallestValue)
+                size--;
                 //Return the updated node
                 return currentNode
             }

@@ -42,17 +42,23 @@ class NodeBSTreeTest {
         tree.insert(3)
         tree.insert(7)
 
-        tree.remove(5)
-        var output =  tree.preOrderTraversal(tree.root)
-        assertEquals(listOf(10,7,3,15), output)
+        // Test removing an existing value (5)
+        var result = tree.remove(5)
+        var output = tree.preOrderTraversal(tree.root)
+        assertTrue(result)  // Ensure remove() returns true for successful removal
+        assertEquals(listOf(10, 7, 3, 15), output)
 
-        tree.remove(10)
+        // Test removing the root value (10)
+        result = tree.remove(10)
         output = tree.preOrderTraversal(tree.root)
-        assertEquals(listOf(15,7,3), output)
+        assertTrue(result)  // Ensure remove() returns true for successful removal
+        assertEquals(listOf(15, 7, 3), output)
 
+        // Test removing a value from an empty tree
         val emptyTree = NodeBSTree<Int>()
-        emptyTree.remove(5)
+        result = emptyTree.remove(5)
         output = emptyTree.preOrderTraversal(emptyTree.root)
+        assertFalse(result)  // Ensure remove() returns false when nothing is removed
         assertEquals(listOf(), output)
     }
 
