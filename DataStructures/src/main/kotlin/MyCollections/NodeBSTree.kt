@@ -1,6 +1,8 @@
 package MyCollections
 
-import com.sun.source.tree.BinaryTree
+/*This is a typical implementation of a Binary Search Tree using nodes
+* It contains a Node inner class and functions needed to add, remove, search, and traverse the tree
+* */
 
 class NodeBSTree<E : Comparable<E>> {
     inner class  Node<E>(var value: E)  {
